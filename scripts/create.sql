@@ -1,7 +1,11 @@
+DROP TABLE BancoPerfil;
+DROP TABLE BancoPerfilUsuario;
+DROP TABLE Banco;
+
 CREATE TABLE Banco
 (
   IdBanco integer NOT NULL AUTO_INCREMENT,
-  Banco varchar(30),
+  Banco varchar(100),
   CONSTRAINT IdBanco PRIMARY KEY (IdBanco)
 );
 
@@ -10,6 +14,8 @@ CREATE TABLE BancoPerfil
   idBanco integer,
   idPerfil integer
 );
+
+
 
 CREATE TABLE PerfilFinanciero
 (
@@ -22,7 +28,7 @@ CREATE TABLE PerfilFinanciero
 );
 
 ALTER TABLE BancoPerfil ADD CONSTRAINT FK_BancoPerfil_
-  FOREIGN KEY (idBanco) REFERENCES Banco (IdBanco);
+FOREIGN KEY (idBanco) REFERENCES Banco (IdBanco);
 
 ALTER TABLE BancoPerfil ADD CONSTRAINT FK_BancoPerfil_1
-  FOREIGN KEY (idPerfil) REFERENCES PerfilFinanciero (IdPerfil);
+FOREIGN KEY (idPerfil) REFERENCES PerfilFinanciero (IdPerfil);
