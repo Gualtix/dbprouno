@@ -1,8 +1,8 @@
 /*Mostrar los 5 primeros bancos en orden ascendente que hayan tenido el mejor punteo en el
 Ranking Bancario para el mes de noviembre 2020.*/
 
-set @tmp=0;
-SELECT (@tmp := @tmp +1) as Ranking,Banco.Banco,PerfilFinanciero.Activo,PerfilFinanciero.fecha AS NOVIEMBRE_2020 from Banco,BancoPerfil,PerfilFinanciero 
+set @tmp=6;
+SELECT (@tmp := @tmp - 1) as Ranking,Banco.Banco,PerfilFinanciero.Activo,PerfilFinanciero.fecha AS NOVIEMBRE_2020 from Banco,BancoPerfil,PerfilFinanciero 
 WHERE 
 	BancoPerfil.idBanco = Banco.IdBanco 
 	AND 
@@ -15,8 +15,9 @@ WHERE
 /*Mostrar los últimos 5 bancos en orden descendente que hayan tenido el peor punteo en el
 Ranking Bancario para el mes de febrero 2021*/
 
-set @tmp=0;
-SELECT (@tmp := @tmp +1) as Ranking,Banco.Banco,PerfilFinanciero.Activo,PerfilFinanciero.fecha AS NOVIEMBRE_2020 from Banco,BancoPerfil,PerfilFinanciero 
+
+set @tmp=18;
+SELECT (@tmp := @tmp - 1) as Ranking,Banco.Banco,PerfilFinanciero.Activo,PerfilFinanciero.fecha AS FEBRERO_2020 from Banco,BancoPerfil,PerfilFinanciero 
 WHERE 
 	BancoPerfil.idBanco = Banco.IdBanco 
 	AND 
@@ -28,9 +29,7 @@ WHERE
 
 /*Mostrar los primeros 3 bancos en orden ascendente que hayan obtenido el mejor punteo en el
 Ranking Bancario en el primer semestre quiere; decir del 30/11/2020 al 30/04/2021*/
-
-set @tmp=0;
-SELECT (@tmp := @tmp +1) as Ranking,Banco.Banco,SUM(PerfilFinanciero.Activo) AS Activo from Banco,BancoPerfil,PerfilFinanciero 
+SELECT Banco.Banco,SUM(PerfilFinanciero.Activo) AS Activo from Banco,BancoPerfil,PerfilFinanciero 
 WHERE 
 	BancoPerfil.idBanco = Banco.IdBanco 
 	AND 
@@ -43,11 +42,11 @@ WHERE
 
 
 
+
+
 /*Mostrar al mejor banco quiere decir al banco que tenga la posición 1 en el Ranking Bancario
 durante el año completo; quiere decir del 30/11/2020 al 31/10/2021*/
-
-set @tmp=0;
-SELECT (@tmp := @tmp +1) as Ranking,Banco.Banco,SUM(PerfilFinanciero.Activo) AS Activo from Banco,BancoPerfil,PerfilFinanciero 
+SELECT Banco.Banco,SUM(PerfilFinanciero.Activo) AS Activo from Banco,BancoPerfil,PerfilFinanciero 
 WHERE 
 	BancoPerfil.idBanco = Banco.IdBanco 
 	AND 
