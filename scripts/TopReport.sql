@@ -16,37 +16,38 @@ WHERE
 Ranking Bancario para el mes de febrero 2021*/
 
 
-set @tmp=18;
-SELECT (@tmp := @tmp - 1) as Ranking,Banco.Banco,PerfilFinanciero.Activo,PerfilFinanciero.fecha AS FEBRERO_2020 from Banco,BancoPerfil,PerfilFinanciero 
+set @tmp=12;
+SELECT (@tmp := @tmp + 1) as Ranking,Banco.Banco,PerfilFinanciero.Activo,PerfilFinanciero.fecha AS FEBRERO_2021 from Banco,BancoPerfil,PerfilFinanciero 
 WHERE 
 	BancoPerfil.idBanco = Banco.IdBanco 
 	AND 
 	BancoPerfil.idPerfil = PerfilFinanciero.IdPerfil
 	AND 
-	PerfilFinanciero.fecha = "2020-11-30 00:00:00" ORDER BY PerfilFinanciero.Activo DESC LIMIT 12,17;
+	PerfilFinanciero.fecha = "2021-02-28 00:00:00" ORDER BY PerfilFinanciero.Activo DESC LIMIT 12,17;
 ;
 
 
 /*Mostrar los primeros 3 bancos en orden ascendente que hayan obtenido el mejor punteo en el
 Ranking Bancario en el primer semestre quiere; decir del 30/11/2020 al 30/04/2021*/
-SELECT Banco.Banco,SUM(PerfilFinanciero.Activo) AS Activo from Banco,BancoPerfil,PerfilFinanciero 
-WHERE 
-	BancoPerfil.idBanco = Banco.IdBanco 
-	AND 
-	BancoPerfil.idPerfil = PerfilFinanciero.IdPerfil
-	AND 
-	PerfilFinanciero.fecha >= '2020-11-30' AND PerfilFinanciero.fecha <= '2021-04-30'
-	GROUP BY Banco.Banco
-	ORDER BY Activo ASC LIMIT 14,17
-;
 
-
-
+set @tmp=4;
+SELECT (@tmp := @tmp - 1) as Ranking,RESUMEN.*
+FROM (
+	SELECT Banco.Banco,SUM(PerfilFinanciero.Activo) AS Activo from Banco,BancoPerfil,PerfilFinanciero 
+	WHERE 
+		BancoPerfil.idBanco = Banco.IdBanco 
+		AND 
+		BancoPerfil.idPerfil = PerfilFinanciero.IdPerfil
+		AND 
+		PerfilFinanciero.fecha >= '2020-11-30' AND PerfilFinanciero.fecha <= '2021-04-30'
+		GROUP BY Banco.Banco
+		ORDER BY Activo ASC LIMIT 14,17
+)RESUMEN;
 
 
 /*Mostrar al mejor banco quiere decir al banco que tenga la posición 1 en el Ranking Bancario
 durante el año completo; quiere decir del 30/11/2020 al 31/10/2021*/
-SELECT Banco.Banco,SUM(PerfilFinanciero.Activo) AS Activo from Banco,BancoPerfil,PerfilFinanciero 
+SELECT '1' as Ranking,Banco.Banco,SUM(PerfilFinanciero.Activo) AS Activo from Banco,BancoPerfil,PerfilFinanciero 
 WHERE 
 	BancoPerfil.idBanco = Banco.IdBanco 
 	AND 
