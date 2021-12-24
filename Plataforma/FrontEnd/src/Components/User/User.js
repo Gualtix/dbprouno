@@ -199,26 +199,16 @@ const Register = ({ history }) => {
     async function getUsuario() {
       await axios
         .post(
-          "http://" +
-          serversAddr.backend.host +
-          ":" +
-          serversAddr.backend.port +
-          "/middleware",
+          "http://localhost:9090/informacion_usuario",
           {
-            peticion: "/informacion_usuario",
-            server: 1,
-            data: {
-              nickname: localStorage.getItem("username"),
-            }
+            nickname: localStorage.getItem("username"),
           }
         )
         .then((response) => {
-          console.log(response.data.fechanacimiento.substring(0, 10));
-          if (response.data.nombre !== undefined) {
+          console.log(response.data.user);
+          if (response.data.user !== undefined) {
             setValues({
-              birthday: response.data.fechanacimiento.substring(0, 10),
-              name: response.data.nombre,
-              email: response.data.email,
+              name: response.data.user,
               password: "",
               passwordConfirm: "",
               showPassword: false,
@@ -245,138 +235,10 @@ const Register = ({ history }) => {
                 src={"/logIn.png"}
               />
               <p style={{ textAlign: "centered", width: "300px" }}>
-                <strong>Perfil de Usuario:</strong>
+                <strong>Perfil de Usuario: {valuesUser.name}</strong>
               </p>
             </div>
-            <Box
-              display="flex"
-              justifyContent="center"
-              p={1}
-              flexGrow={1}
-              bgcolor="#F7F7EF"
-            >
-              <Form onSubmit={handleClick}>
-                <FormGroup>
-                  <Box>
-                    <TextField
-                      label="name"
-                      onChange={handleChange("name")}
-                      required
-                      id="outlined-required"
-                      className={clsx(classes.margin, classes.textField)}
-                      value={valuesUser.name}
-                      variant="outlined"
-                    />
-                  </Box>
-                  <Box>
-                    <TextField
-                      label="e-mail"
-                      onChange={handleChange("email")}
-                      required
-                      id="outlined-required"
-                      className={clsx(classes.margin, classes.textField)}
-                      value={valuesUser.email}
-                      variant="outlined"
-                      type="email"
-                    />
-                  </Box>
-                  <Box>
-                    <input
-                      id="date"
-                      className={clsx(classes.margin, classes.textField)}
-                      type="date" onChange={handleChange("birthday")}
-                      value={valuesUser.birthday}
-                      require
-                    />
-                  </Box>
-                  <Box>
-                    <FormControl
-                      className={clsx(classes.margin, classes.textField)}
-                      variant="outlined"
-                    >
-                      <InputLabel htmlFor="outlined-adornment-password">
-                        Contraseña
-                      </InputLabel>
-                      <OutlinedInput
-                        id="outlined-adornment-password"
-                        type={valuesUser.showPassword ? "text" : "password"}
-                        value={valuesUser.password}
-                        onChange={handleChange("password")}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPassword}
-                              onMouseDown={handleMouseDownPassword}
-                              edge="end"
-                            >
-                              {valuesUser.showPassword ? (
-                                <Visibility />
-                              ) : (
-                                <VisibilityOff />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        labelWidth={70}
-                      />
-                    </FormControl>
-                  </Box>
-                  <Box>
-                    <FormControl
-                      className={clsx(classes.margin, classes.textField)}
-                      variant="outlined"
-                    >
-                      <InputLabel htmlFor="outlined-adornment-password">
-                        Confirmar Contraseña
-                      </InputLabel>
-                      <OutlinedInput
-                        id="outlined-adornment-password"
-                        type={
-                          valuesUser.showPasswordConfirm ? "text" : "password"
-                        }
-                        value={valuesUser.passwordConfirm}
-                        onChange={handleChange("passwordConfirm")}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPasswordConfirm}
-                              onMouseDown={handleMouseDownPassword}
-                              edge="end"
-                            >
-                              {valuesUser.showPasswordConfirm ? (
-                                <Visibility />
-                              ) : (
-                                <VisibilityOff />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        labelWidth={70}
-                      />
-                    </FormControl>
-                  </Box>
-                  <Box className={clsx(classes.margin)}>
-                    <Button
-                      data-testid="button-register"
-                      variant="contained"
-                      size="large"
-                      style={{
-                        color: "#FFFFFF",
-                        backgroundColor: "#0B78F4",
-                        width: "95%",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                      onClick={handleClick}
-                    >
-                      Actualizar
-                    </Button>
-                  </Box>
-                </FormGroup>
-              </Form>
-            </Box>
+            
           </CardContent>
         </Card>
       </Box>

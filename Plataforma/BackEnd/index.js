@@ -20,15 +20,45 @@ con.connect(function(err){
   console.log("Conexion Exitosa");
   app.post('/registrar', (req, res) => {
     if ("password" in req.body && "nickname" in req.body) {
-      var sql = `INSERT INTO usuario(usuario, pass) VALUES ('${req.body.nickname}', '${req.body.password}');`
+      var sql = `INSERT INTO usuario(user, pass) SELECT '${req.body.nickname}', '${req.body.password}'
+                  WHERE NOT EXISTS(SELECT user FROM usuario WHERE user = '${req.body.nickname}');`
       con.query(sql, function(err, result){
         if(err) throw err;
+        
         console.log("Registrado");
-        result = {nickname: req.body.nickname}
-        return result
+        return res.json(result.nickname)
       });
     }
   });
+
+  app.post('/login', (req, res) => {
+    if ("password" in req.body && "nickname" in req.body) {
+      var sql = `SELECT user FROM usuario where user = '${req.body.nickname}' and pass = '${req.body.password}';`
+      con.query(sql, function(err, result){
+        if(err) throw err;
+          if(result.length!=0){
+            return res.json(result[0]); 
+          }else{
+           return res.json("false");
+          }  
+      });
+    }
+  });
+
+  app.post('/informacion_usuario', (req, res) => {
+    if("nickname" in req.body){
+      var sql = `SELECT user FROM usuario WHERE user = '${req.body.nickname} ';`
+      con.query(sql, function(err, result){
+        if(err) throw err;
+          if(result.length!=0){
+            return res.json(result[0]); 
+          }else{
+           return res.json("false");
+          }  
+      });
+    }
+  });
+
 });
 
 /* const connectionData = {

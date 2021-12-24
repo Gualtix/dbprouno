@@ -99,7 +99,7 @@ const Login = ({ history }) => {
   const handleClick = async (event) => {
     event.preventDefault();
     history.push("/User");
-    /* let correcto = true;
+    let correcto = true;
     if (valuesUser.username === "") {
       toast.error("El campo Nombre de Usuario es obligatorio", {
         position: toast.POSITION.TOP_RIGHT,
@@ -122,28 +122,18 @@ const Login = ({ history }) => {
       correcto = false;
     }
     if (correcto) {
-      let passEncrypt = shajs("sha256")
-        .update(valuesUser.password)
-        .digest("hex");
       //Verificacion de Credenciales
+      console.log("llego aqui el login");
       await axios
         .post(
-          "http://" +
-            serversAddr.backend.host +
-            ":" +
-            serversAddr.backend.port +
-            "/middleware",
+          "http://localhost:9090/login",
           {
-            peticion: "/login",
-            server: 1,
-            data: {
-              nickname: valuesUser.username, 
-              password: passEncrypt
-            }
+            nickname: valuesUser.username, 
+            password: valuesUser.password
           }
         )
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
           if (response.data.exists === 0) {
             toast.error("Credenciales Incorrectas", {
               position: toast.POSITION.TOP_RIGHT,
@@ -159,12 +149,12 @@ const Login = ({ history }) => {
             localStorage.setItem("roles", JSON.stringify(["usuario"]));
             localStorage.setItem("permisos", JSON.stringify(["usuario"]));
             localStorage.setItem("username", valuesUser.username);
-            localStorage.setItem("profilepic", response.data.profileimage);
+            //localStorage.setItem("profilepic", response.data.profileimage);
             setActivarBotonGuardar(false);
             history.push("/");
           }
         });
-    } */
+    }
   };
 
   return (

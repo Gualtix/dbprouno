@@ -11,9 +11,8 @@ import { List } from "@rmwc/list";
 import Login from '../Login/Login';
 import { ToastContainer } from 'react-toastify';
 import User from  '../User/User';
-import Cancion from '../Cancion/Cancion'
-import Eliminar from  '../Eliminar/Eliminar'
-import EliminarC from  '../EliminarC/EliminarC'
+import Tabla from '../Tabla/Tabla';
+import Grafica from '../Grafica/Grafica';
 import history from '../History/History';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -166,9 +165,8 @@ const NavBar = ({ history }) => {
                                     <FormGroup>
                                         <Box> <Label style={{ fontWeight: 'bold', color: '#CA5300' }} className={classes.margen}>- Opciones</Label></Box>
                                         <Box><Links path='/' texto='Inicio' /></Box>
-                                        <Box><Links path='/cancion' texto='Cancion' /></Box>                                           
-                                        <Box><Links path='/Eliminar' texto='Eliminar Album' /></Box>  
-                                        <Box><Links path='/EliminarC' texto='Eliminar Cancion' /></Box>                                     
+                                        <Box><Links path='/tabla' texto='Tabla Ranking Bancario' /></Box>                                           
+                                        <Box><Links path='/grafica' texto='Grafica Ranking Bancario' /></Box>                                  
                                     </FormGroup>
                                     : null}
                             </List>
@@ -183,7 +181,7 @@ const NavBar = ({ history }) => {
                             <TopAppBarRow  >
                                 <TopAppBarSection>
                                     <TopAppBarNavigationIcon icon="menu" onClick={() => drawerOpen(!open)} />
-                                    <TopAppBarTitle>Sistema</TopAppBarTitle>
+                                    <TopAppBarTitle><Links texto='Cargar Datos' /></TopAppBarTitle>
                                 </TopAppBarSection>
                                 <TopAppBarSection alignEnd>
                                     <TopAppBarActionItem icon={{
@@ -205,7 +203,8 @@ const NavBar = ({ history }) => {
 
                             {(localStorage.getItem('esAutenticado') === 'true') ? <Route exact path='/' component={User} ></Route> : null}
                             {(localStorage.getItem('esAutenticado') === 'true') ? <Route exact path='/Perfil' component={User} ></Route> : null}
-                            {(localStorage.getItem('esAutenticado') === 'true') ? <Route exact path='/Cancion' component={Cancion} ></Route> : null}
+                            {(localStorage.getItem('esAutenticado') === 'true') ? <Route exact path='/tabla' component={Tabla} ></Route> : null}
+                            {(localStorage.getItem('esAutenticado') === 'true') ? <Route exact path='/grafica' component={Grafica} ></Route> : null}
 
                             {/* ROL DE USUARIO */}
                             {/*(comparaRoles('usuario')) ? <Route exact path='/CrearSede' component={CrearSede} /> : null*/}
