@@ -25,8 +25,6 @@ import "@rmwc/typography/styles";
 import Titulo from "../Props/Titulo";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const shajs = require('sha.js');
-const serversAddr = require("../serversAddr");
 
 const useStyles = makeStyles((theme) => ({
   root: {

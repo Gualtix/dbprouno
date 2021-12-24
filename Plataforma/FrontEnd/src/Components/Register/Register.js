@@ -23,8 +23,6 @@ import "@rmwc/typography/styles";
 import Titulo from "../Props/Titulo";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const serversAddr = require("../serversAddr");
-const shajs = require('sha.js');
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -137,12 +135,6 @@ const Register = ({ history }) => {
             "Registro Exitoso" + valuesUser.nickname,
             { position: toast.POSITION.TOP_RIGHT, autoClose: 5000 }
           );
-          /* localStorage.setItem("esAutenticado", true);
-          localStorage.setItem("roles", JSON.stringify(["usuario"]));
-          localStorage.setItem("permisos", JSON.stringify(["usuario"]));
-          localStorage.setItem("username", response.data.nickname);
-          setActivarBotonGuardar(false);
-          history.push("/"); */
         } else {
           toast.error("Error: " + response.data.error, {
             position: toast.POSITION.TOP_RIGHT,
