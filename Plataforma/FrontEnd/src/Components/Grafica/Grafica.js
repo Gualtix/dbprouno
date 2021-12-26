@@ -15,21 +15,6 @@ import axios from "axios";
 
 //var array = [];
 //4997680000	4806250000	191427000	2020-11-30 00:00:00
-/*
-var array = [
-    createData('banco1', 1, new Date('2020-11-30 00:00:00')),
-    createData('banco1', 2, new Date('2020-12-31 00:00:00')),
-    createData('banco1', 1, new Date('2021-01-31 00:00:00')),
-    createData('banco1', 1, new Date('2020-02-28 00:00:00')),
-    createData('banco2', 2, new Date('2020-11-30 00:00:00')),
-    createData('banco2', 4, new Date('2020-12-31 00:00:00')),
-    createData('banco2', 2, new Date('2021-01-31 00:00:00')),
-    createData('banco2', 3, new Date('2020-02-28 00:00:00')),
-    createData('banco3', 3, new Date('2020-11-30 00:00:00')),
-    createData('banco3', 3, new Date('2020-12-31 00:00:00')),
-    createData('banco3', 2, new Date('2021-01-31 00:00:00')),
-    createData('banco3', 2, new Date('2020-02-28 00:00:00')),
-  ];*/
 
   var array = [
     createData('banco1', 1, ('2020-11-30 00:00:00')),
@@ -107,8 +92,8 @@ const Grafica = ({history}) => {
                         array.map((e,index)=>(
                             fechas = new Date(e.fecha),
                             e.banco === el ? (
-                                cadena1.push({"y":e.ranking,"label":e.fecha})
-                                //cadena1.push({"y":e.ranking,"label":fechas.getFullYear() +"/"+ fechas.getMonth()+"/"+fechas.getDate()})
+                                //cadena1.push({"y":e.ranking,"label":e.fecha})
+                                cadena1.push({"y":e.ranking,"label":fechas.getFullYear() +"/"+ (fechas.getMonth()+1)+"/"+fechas.getDate()})
                             ):""
                         )
                     )

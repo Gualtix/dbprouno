@@ -9,13 +9,17 @@ import "date-fns";
 import "@rmwc/typography/styles";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import Select from "./Select"
 
 
 const Tabla = ({history}) => {
     return(
+        <>
         <center>
             <label>Tabla Ranking de Bancos AQUI</label>
         </center>
+        <Select />
+        </>
     );
 }
 
